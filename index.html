@@ -13,50 +13,30 @@
             margin: 0;
             background-color: #f4f4f4;
             height: 100vh;
+            overflow: hidden; /* Ensure no scrollbars appear on body */
         }
         .pdf-container {
-            width: 100%;
-            height: 100%;
+            width: 90%;
+            height: 90%;
             overflow: hidden;
             border: 1px solid #ddd;
             background-color: #fff;
-            object-fit: contain;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
-            transform: scale(1);
-            transform-origin: 0 0;
+            /* Ensure the PDF scales to fit the container */
+            object-fit: contain;
         }
     </style>
 </head>
 <body>
     <div class="pdf-container">
-        <iframe id="pdfIframe" src="menu-losbalcarce.pdf" type="application/pdf"></iframe>
+        <iframe src="menu-losbalcarce.pdf" type="application/pdf"></iframe>
     </div>
-    <script>
-        var buffer = 20; //scroll bar buffer
-        var iframe = document.getElementById('pdfIframe');
-        
-        function pageY(elem) {
-            return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
-        }
-        
-        function resizeIframe() {
-            var height = document.documentElement.clientHeight;
-            height -= pageY(document.getElementById('ifm'))+ buffer ;
-            height = (height < 0) ? 0 : height;
-            document.getElementById('ifm').style.height = height + 'px';
-        }
-        
-        // .onload doesn't work with IE8 and older.
-        if (iframe.attachEvent) {
-            iframe.attachEvent("onload", resizeIframe);
-        } else {
-            iframe.onload=resizeIframe;
-        }
-        
-        window.onresize = resizeIframe;</script>
 </body>
 </html>
