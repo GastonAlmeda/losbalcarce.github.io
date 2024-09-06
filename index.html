@@ -7,22 +7,26 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin: 0;
+            background-color: #f4f4f4;
             height: 100vh;
-            overflow: hidden;
         }
         .pdf-container {
             width: 100%;
             height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             overflow: hidden;
-            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            object-fit: contain;
         }
         iframe {
+            width: 100%;
+            height: 100%;
             border: none;
-            /* Initial scale, will be adjusted with JavaScript */
+            transform: scale(1);
             transform-origin: 0 0;
         }
     </style>
@@ -32,30 +36,27 @@
         <iframe id="pdfIframe" src="menu-losbalcarce.pdf" type="application/pdf"></iframe>
     </div>
     <script>
-        function resizeIframe() {
-            const iframe = document.getElementById('pdfIframe');
-            const container = iframe.parentElement;
-            const containerWidth = container.clientWidth;
-            const containerHeight = container.clientHeight;
-            
-            // Reset scale
-            iframe.style.transform = 'scale(1)';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            
-            // Calculate scaling factor
-            const scaleX = containerWidth / iframe.contentWindow.document.body.scrollWidth;
-            const scaleY = containerHeight / iframe.contentWindow.document.body.scrollHeight;
-            const scale = Math.min(scaleX, scaleY);
-            
-            // Apply scaling
-            iframe.style.transform = `scale(${scale})`;
-            iframe.style.width = `${iframe.contentWindow.document.body.scrollWidth}px`;
-            iframe.style.height = `${iframe.contentWindow.document.body.scrollHeight}px`;
+        var buffer = 20; //scroll bar buffer
+        var iframe = document.getElementById('pdfIframe');
+        
+        function pageY(elem) {
+            return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
         }
         
-        window.onload = resizeIframe;
-        window.onresize = resizeIframe;
-    </script>
+        function resizeIframe() {
+            var height = document.documentElement.clientHeight;
+            height -= pageY(document.getElementById('ifm'))+ buffer ;
+            height = (height < 0) ? 0 : height;
+            document.getElementById('ifm').style.height = height + 'px';
+        }
+        
+        // .onload doesn't work with IE8 and older.
+        if (iframe.attachEvent) {
+            iframe.attachEvent("onload", resizeIframe);
+        } else {
+            iframe.onload=resizeIframe;
+        }
+        
+        window.onresize = resizeIframe;</script>
 </body>
 </html>
