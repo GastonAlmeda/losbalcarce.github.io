@@ -13,17 +13,31 @@
             height: 100vh;
             margin: 0;
             background-color: #f4f4f4;
-            width: 80%;
-            height: 80%;
         }
-        iframe {
+        /* iframe {
             border: none;
             width: 100%;
             height: 100%;
+        } */
+        .pdf-container {
+            width: 90%;
+            height: 90%;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            transform: scale(1);
+            transform-origin: 0 0;
         }
     </style>
 </head>
 <body>
-    <iframe src="menu-losbalcarce.pdf" type="application/pdf"></iframe>
+    <div class="pdf-container">
+        <iframe id="pdfIframe" src="menu-losbalcarce.pdf" type="application/pdf"></iframe>
+    </div>
 </body>
 </html>
