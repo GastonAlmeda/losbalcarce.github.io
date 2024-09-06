@@ -14,17 +14,13 @@
             margin: 0;
             background-color: #f4f4f4;
         }
-        /* iframe {
-            border: none;
-            width: 100%;
-            height: 100%;
-        } */
         .pdf-container {
             width: 100%;
             height: 100%;
             overflow: hidden;
             border: 1px solid #ddd;
             background-color: #fff;
+            object-fit: contain;
         }
         iframe {
             width: 100%;
@@ -39,28 +35,5 @@
     <div class="pdf-container">
         <iframe id="pdfIframe" src="menu-losbalcarce.pdf" type="application/pdf"></iframe>
     </div>
-    <!-- <script>
-        let scale = 1;
-        const iframe = document.getElementById('pdfIframe');
-
-        function setScale(newScale) {
-            scale = newScale;
-            iframe.style.transform = `scale(${scale})`;
-            iframe.style.transformOrigin = '0 0'; // Ensure scaling starts from the top-left
-        }
-
-        // Fit the PDF to container size initially
-        function fitToContainer() {
-            iframe.onload = function() {
-                const containerWidth = iframe.parentElement.offsetWidth;
-                const containerHeight = iframe.parentElement.offsetHeight;
-                iframe.style.width = `${containerWidth}px`;
-                iframe.style.height = `${containerHeight}px`;
-                setScale(Math.min(containerWidth / iframe.contentWindow.document.body.scrollWidth, containerHeight / iframe.contentWindow.document.body.scrollHeight));
-            }
-        }
-
-        fitToContainer();
-    </script> -->
 </body>
 </html>
