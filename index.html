@@ -13,24 +13,23 @@
             margin: 0;
             background-color: #f4f4f4;
             height: 100vh;
-            overflow: hidden; /* Ensure no scrollbars appear on body */
+            overflow: hidden; /* Hide scrollbars on the body */
         }
         .pdf-container {
-            width: 90%;
-            height: 90%;
-            overflow: hidden;
+            width: 90vw; /* Viewport width units */
+            height: 90vh; /* Viewport height units */
             border: 1px solid #ddd;
             background-color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
-            /* Ensure the PDF scales to fit the container */
-            object-fit: contain;
+            object-fit: contain; /* Ensure the PDF fits within the container */
         }
     </style>
 </head>
